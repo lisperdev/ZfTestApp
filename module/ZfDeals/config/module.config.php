@@ -13,6 +13,16 @@ return array(
                     ),
                 ),
             ),
+            'zf-deals\admin\product\add' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/deals/admin/product/add',
+                    'defaults' => array(
+                        'controller' => 'ZfDeals\Controller\Admin',
+                        'action'     => 'add-product',
+                    ),
+                ),
+            ),
         ),
     ),
 
