@@ -16,11 +16,24 @@ class AdminController extends AbstractActionController
 
         if($this->getRequest()->isPost())
         {
+            $form->setHydrator(new \Zend\Stdlib\Hydrator\Reflection());
+            $form->bind(new \ZfDeals\Entity\Product());
             $form->setData($this->getRequest()->getPost());
 
             if($form->isValid())
             {
-                //todo
+                $newEntity = $form->getData();
+                $mapper = $this->getServiceLocator()
+                    ->get('ZfDeals\Mapper\Product');
+
+                $mapper->insert($newEntity);
+                $form = new \ZfDeals\Form\ProductAdd();
+                return new ViewModel(
+                    array(
+                        'form' => $form,
+                        'success' => true
+                    )
+                );
             }
             else
             {
